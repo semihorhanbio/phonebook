@@ -1,12 +1,14 @@
 import persons from './data.js'
 import express from 'express'
 import morgan from 'morgan'
+import cors from 'cors'
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 const app = express()
 
 morgan.token('data', (req, res) => JSON.stringify(req.body))
 
+app.use(cors())
 app.use(express.json())
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms - :data'))
 
